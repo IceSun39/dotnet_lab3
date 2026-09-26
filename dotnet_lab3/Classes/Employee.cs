@@ -44,8 +44,20 @@ namespace dotnet_lab3.Classes
 
         public Employee(string title, int experience, double hour_rate)
         {
+            if(title == null || title.Length == 0)
+            {
+                throw new ArgumentException("Title cannot be null or empty.");
+            }
             this.title = title;
+            if(experience <= 0)
+            {
+                throw new ArgumentException("Experience must be greater than 0.");
+            }
             this.experience = experience;
+            if(hour_rate <= 0)
+            {
+                throw new ArgumentException("Hour rate must be greater than 0.");
+            }
             this.hour_rate = hour_rate;
         }
 
