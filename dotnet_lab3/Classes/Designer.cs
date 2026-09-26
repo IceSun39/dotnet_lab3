@@ -33,6 +33,10 @@ namespace dotnet_lab3.Classes
 
         public override double calculateMonthSalary(int hoursWorked)
         {
+            if (hoursWorked < 0)
+            {
+                throw new ArgumentException("Hours worked cannot be negative.");
+            }
             double salary = HourRate * hoursWorked;
             return salary;
         }
@@ -44,6 +48,10 @@ namespace dotnet_lab3.Classes
 
         public double calculateProjectCost(int hours)
         {
+            if (hours < 0)
+            {
+                throw new ArgumentException("Hours cannot be negative.");
+            }
             return HourRate * hours;
         }
     }
