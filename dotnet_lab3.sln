@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgrammerTest", "Programme
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesignerTest", "DesignerTest\DesignerTest.csproj", "{53A7835A-C0C4-416D-8936-DC871FABE089}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalaryCalculatorTest", "SalaryCalculatorTest\SalaryCalculatorTest.csproj", "{608C45F4-71C2-441E-8E32-2E44E88F70B0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{53A7835A-C0C4-416D-8936-DC871FABE089}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53A7835A-C0C4-416D-8936-DC871FABE089}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53A7835A-C0C4-416D-8936-DC871FABE089}.Release|Any CPU.Build.0 = Release|Any CPU
+		{608C45F4-71C2-441E-8E32-2E44E88F70B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{608C45F4-71C2-441E-8E32-2E44E88F70B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{608C45F4-71C2-441E-8E32-2E44E88F70B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{608C45F4-71C2-441E-8E32-2E44E88F70B0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
