@@ -44,9 +44,9 @@ namespace dotnet_lab3.Classes
 
         public Employee(string title, int experience, double hour_rate)
         {
-            Title = title;
-            Experience = experience;
-            HourRate = hour_rate;
+            this.title = title;
+            this.experience = experience;
+            this.hour_rate = hour_rate;
         }
 
         public abstract double calculateMonthSalary(int hoursWorked);
