@@ -20,5 +20,10 @@ namespace dotnet_lab3
         {
             InitializeComponent();
         }
+
+        private void Frame_Navigated(object sender, NavigationEventArgs e)
+        {
+
+        }
     }
 }
