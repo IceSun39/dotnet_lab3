@@ -42,7 +42,7 @@ namespace dotnet_lab3.Classes
             return projects;
         }
 
-        public double calculateProjectCosr(int hours)
+        public double calculateProjectCost(int hours)
         {
             return HourRate * hours;
         }
