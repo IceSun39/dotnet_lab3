@@ -17,6 +17,12 @@ namespace dotnet_lab3.Classes
     {
         ProgrammerLevel level;
 
+        public ProgrammerLevel Level
+        {
+            get { return level; }
+            set { level = value; }
+        }
+
         public Programmer(string title, int experience, double hour_rate, ProgrammerLevel level) : base(title, experience, hour_rate)
         {
             this.level = level;

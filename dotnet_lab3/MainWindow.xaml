@@ -7,19 +7,47 @@ xmlns:local="clr-namespace:dotnet_lab3"
 mc:Ignorable="d"
 Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <GroupBox Header="Працівник" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="33,30,0,0" Width="718" Height="140"/>
-        <Label Content="Роль" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,58,0,0"/>
-        <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Margin="95,60,0,0" Width="120" SelectedIndex="0">
+        <!-- Група 1: Форма введення -->
+        <GroupBox Header="Працівник" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="33,25,0,0" Width="718" Height="165"/>
+        <Label Content="Роль" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,55,0,0"/>
+        <ComboBox x:Name="typeSpecialistComboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="95,57,0,0" Width="120" SelectedIndex="0" SelectionChanged="typeSpecialistComboBox_SelectionChanged">
             <ComboBoxItem Content="Дизайнер"/>
             <ComboBoxItem Content="Програміст"/>
         </ComboBox>
-        <Label x:Name="titleLabel" Content="Посада" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="235,58,0,0"/>
-        <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Margin="295,62,0,0" Width="130" Height="22"/>
-        <Label Content="Роки досвіду" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="445,58,0,0"/>
-        <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Margin="540,62,0,0" Width="80" Height="22"/>
-        <Label Content="Часова ставка" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,108,0,0"/>
-        <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Margin="145,112,0,0" Width="70" Height="22"/>
-        <Label Content="Спеціалізація" HorizontalAlignment="Left" Margin="260,110,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Margin="365,114,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+
+        <Label x:Name="titleLabel" Content="Посада" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="235,55,0,0"/>
+        <TextBox x:Name="titleTextBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="295,59,0,0" Width="130" Height="22"/>
+
+        <Label Content="Роки досвіду" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="445,55,0,0"/>
+        <TextBox x:Name="experienceTextBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="535,59,0,0" Width="80" Height="22"/>
+
+        <Label Content="Часова ставка" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,100,0,0"/>
+        <TextBox x:Name="hourRateTextBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="145,104,0,0" Width="70" Height="22"/>
+
+        <Label x:Name="specializationLabel" Content="Спеціалізація" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="235,100,0,0"/>
+        <TextBox x:Name="specializationTextBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,104,0,0" Width="120" Height="22"/>
+
+        <!-- ComboBox для програміста (лежить на тому ж місці, що й specializationTextBox) -->
+        <ComboBox x:Name="levelComboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,104,0,0" Width="120" SelectedIndex="0">
+            <ComboBoxItem Content="Джун"/>
+            <ComboBoxItem Content="Сеньйор"/>
+        </ComboBox>
+
+        <!-- Години роботи з правильним Margin -->
+        <Label Content="Години роботи" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="460,100,0,0"/>
+        <TextBox x:Name="hoursWorkedTextBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="565,104,0,0" Width="100" Height="22"/>
+
+        <Button Content="Додати працівника" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,145,0,0" Width="140" Height="26" Click="Button_Click"/>
+
+        <!-- Група 2: Список працівників -->
+        <GroupBox Header="Список працівників" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="33,205,0,0" Width="718" Height="140">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <TextBlock x:Name="allEmployeesLabel" Margin="10" TextWrapping="Wrap"/>
+            </ScrollViewer>
+        </GroupBox>
+
+        <!-- Підсумок -->
+        <Label Content="Загальна зарплата:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="33,355,0,0" FontWeight="Bold"/>
+        <Label x:Name="totalSalaryLabel" Content="0 грн" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="160,355,0,0" FontWeight="Bold"/>
     </Grid>
 </Window>
