@@ -17,7 +17,7 @@ namespace SalaryCalculatorTest
                 { designer, 160 },
                 { programmer, 160 }
             };
-            var salaryCalculator = new dotnet_lab3.Classes.SalaryCalculator();
+            var salaryCalculator = new SalaryCalculator();
 
             double totalSalary = salaryCalculator.totalSalaryForEmployees(employeeHours);
 
@@ -29,7 +29,7 @@ namespace SalaryCalculatorTest
         {
 
             var employeeHours = new Dictionary<Employee, int>();
-            var salaryCalculator = new dotnet_lab3.Classes.SalaryCalculator();
+            var salaryCalculator = new SalaryCalculator();
 
             double totalSalary = salaryCalculator.totalSalaryForEmployees(employeeHours);
 
@@ -43,9 +43,8 @@ namespace SalaryCalculatorTest
             {
                 { designer, -160 }
             };
-            var salaryCalculator = new dotnet_lab3.Classes.SalaryCalculator();
-            double totalSalary = salaryCalculator.totalSalaryForEmployees(employeeHours);
-            Assert.AreEqual(0, totalSalary);
+            var salaryCalculator = new SalaryCalculator();
+            Assert.ThrowsException<ArgumentException>(() => salaryCalculator.totalSalaryForEmployees(employeeHours));
         }
     }
 }
