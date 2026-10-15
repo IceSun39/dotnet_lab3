@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesignerTest", "DesignerTes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalaryCalculatorTest", "SalaryCalculatorTest\SalaryCalculatorTest.csproj", "{608C45F4-71C2-441E-8E32-2E44E88F70B0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMTest", "PMTest\PMTest.csproj", "{FB0D1738-9BE6-4398-B92F-9C0103270FE3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{608C45F4-71C2-441E-8E32-2E44E88F70B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{608C45F4-71C2-441E-8E32-2E44E88F70B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{608C45F4-71C2-441E-8E32-2E44E88F70B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB0D1738-9BE6-4398-B92F-9C0103270FE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB0D1738-9BE6-4398-B92F-9C0103270FE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB0D1738-9BE6-4398-B92F-9C0103270FE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB0D1738-9BE6-4398-B92F-9C0103270FE3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

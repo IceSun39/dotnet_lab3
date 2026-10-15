@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace dotnet_lab3.Classes
 {
-    internal class ProjectManager: Employee
+    public class ProjectManager: Employee
     {
         private List<Employee> team= new();
 
