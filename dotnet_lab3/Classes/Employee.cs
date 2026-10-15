@@ -1,4 +1,5 @@
-﻿using System;
+﻿using dotnet_lab3.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace dotnet_lab3.Classes
 {
-    public abstract class Employee
+    public abstract class Employee: ICalulculateSalary, IGetProjectList
     {
         private string title;
         private int experience;

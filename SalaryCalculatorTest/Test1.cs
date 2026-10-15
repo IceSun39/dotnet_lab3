@@ -46,5 +46,21 @@ namespace SalaryCalculatorTest
             var salaryCalculator = new SalaryCalculator();
             Assert.ThrowsException<ArgumentException>(() => salaryCalculator.totalSalaryForEmployees(employeeHours));
         }
+
+        [TestMethod]
+        public void calculateMaxSalary()
+        {
+            var designer = new Designer("Designer", 5, 50, "UI/UX");
+            var programmer = new Programmer("Programmer", 3, 60, ProgrammerLevel.Junior);
+            var employeeHours = new Dictionary<Employee, int>
+            {
+                { designer, 100 },
+                { programmer, 110 }
+            };
+            var salaryCalculator = new SalaryCalculator();
+            double maxSalary = salaryCalculator.maxlSalaryForEmployees(employeeHours);
+            double expectedMaxSalary = Math.Max(designer.calculateMonthSalary(100), programmer.calculateMonthSalary(110));
+            Assert.AreEqual(expectedMaxSalary, maxSalary);
+        }
     }
 }

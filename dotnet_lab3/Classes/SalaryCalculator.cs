@@ -23,5 +23,19 @@ namespace dotnet_lab3.Classes
             }
             return totalSalary;
         }
+
+        public double maxlSalaryForEmployees(Dictionary<Employee, int> employeeHours)
+        {
+            double maxSalary = 0;
+            foreach (var entry in employeeHours)
+            {
+                double salary = entry.Key.calculateMonthSalary(entry.Value);
+                if (salary > maxSalary)
+                {
+                    maxSalary = salary;
+                }
+            }
+            return maxSalary;
+        }
     }
 }
