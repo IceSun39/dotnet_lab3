@@ -8,5 +8,6 @@ namespace dotnet_lab3.Interfaces
 {
     internal interface ICalulculateSalary
     {
+        double calculateMonthSalary(int hoursWorked);
     }
 }

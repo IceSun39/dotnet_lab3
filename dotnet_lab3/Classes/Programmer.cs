@@ -1,4 +1,5 @@
-﻿using System;
+﻿using dotnet_lab3.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ namespace dotnet_lab3.Classes
         Senior
     }
 
-    public class Programmer : Employee
+    public class Programmer : Employee, ICalulcateBonus
     {
         ProgrammerLevel level;
 

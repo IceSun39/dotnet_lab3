@@ -12,12 +12,10 @@ using dotnet_lab3.Classes;
 
 namespace dotnet_lab3
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         private Dictionary<Employee, int> employees = new Dictionary<Employee, int>();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -27,19 +25,30 @@ namespace dotnet_lab3
 
         private void SetInitialUIState()
         {
-            if (specializationLabel == null || levelComboBox == null || typeSpecialistComboBox == null)
+            if (specializationLabel == null || levelComboBox == null || typeSpecialistComboBox == null || specializationTextBox == null)
                 return;
 
             int specialist = typeSpecialistComboBox.SelectedIndex;
-            if (specialist == 0)
+            if (specialist == 0) // Дизайнер
             {
+                specializationLabel.Visibility = Visibility.Visible;
                 specializationLabel.Content = "Спеціалізація:";
+                specializationTextBox.Visibility = Visibility.Visible;
                 levelComboBox.Visibility = Visibility.Collapsed;
             }
-            else
+            else if (specialist == 1) // Програміст
             {
+                specializationLabel.Visibility = Visibility.Visible;
                 specializationLabel.Content = "Рівень:";
+                specializationTextBox.Visibility = Visibility.Collapsed;
                 levelComboBox.Visibility = Visibility.Visible;
+            }
+            else if (specialist == 2) // Проджект Менеджер
+            {
+                // У менеджера немає специфічних полів, тому ховаємо їх
+                specializationLabel.Visibility = Visibility.Hidden;
+                specializationTextBox.Visibility = Visibility.Collapsed;
+                levelComboBox.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -50,15 +59,22 @@ namespace dotnet_lab3
 
         private void updateEmployeeLabel(Employee employee)
         {
-            if(employee is Designer designer)
+            // Беремо відпрацьовані години з нашого словника
+            int workedHours = employees[employee];
+
+            if (employee is Designer designer)
             {
                 string specialization = $"Спеціалізація: {designer.Specialization}";
-                allEmployeesLabel.Text += $"Позиція: {employee.Title}, Спеціалізація: {specialization}, Досвід: {employee.Experience} років, Погодинна ставка: {employee.HourRate} грн/год, Місячна зарплата: {employee.calculateMonthSalary(160)} грн\n";
+                allEmployeesLabel.Text += $"Позиція: {employee.Title} (Дизайнер), {specialization}, Досвід: {employee.Experience} років, Ставка: {employee.HourRate} грн/год, ЗП: {employee.calculateMonthSalary(workedHours)} грн\n";
             }
             else if (employee is Programmer programmer)
             {
                 string level = programmer.Level == ProgrammerLevel.Junior ? "Джун" : "Сеньйор";
-                allEmployeesLabel.Text += $"Позиція: {employee.Title}, Рівень: {level}, Досвід: {employee.Experience} років, Погодинна ставка: {employee.HourRate} грн/год, Місячна зарплата: {employee.calculateMonthSalary(160)} грн\n";
+                allEmployeesLabel.Text += $"Позиція: {employee.Title} (Програміст), Рівень: {level}, Досвід: {employee.Experience} років, Ставка: {employee.HourRate} грн/год, ЗП: {employee.calculateMonthSalary(workedHours)} грн\n";
+            }
+            else if (employee is ProjectManager pm)
+            {
+                allEmployeesLabel.Text += $"Позиція: {employee.Title} (PM), Досвід: {employee.Experience} років, Ставка: {employee.HourRate} грн/год, ЗП: {employee.calculateMonthSalary(workedHours)} грн\n";
             }
         }
 
@@ -71,23 +87,23 @@ namespace dotnet_lab3
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             int roleId = typeSpecialistComboBox.SelectedIndex;
-            if(roleId == -1)
+            if (roleId == -1)
             {
                 MessageBox.Show("Будь ласка, оберіть тип спеціаліста.");
                 return;
             }
 
             string title = titleTextBox.Text;
-            if(string.IsNullOrWhiteSpace(title))
+            if (string.IsNullOrWhiteSpace(title))
             {
-                MessageBox.Show("Назва не може бути порожньою.");
+                MessageBox.Show("Назва посади не може бути порожньою.");
                 return;
             }
 
             int experience;
-            if (!int.TryParse(experienceTextBox.Text, out experience) || experience <= 0)
+            if (!int.TryParse(experienceTextBox.Text, out experience) || experience < 0)
             {
-                MessageBox.Show("Досвід повинен бути додатнім числом.");
+                MessageBox.Show("Досвід повинен бути додатнім числом або нулем.");
                 return;
             }
 
@@ -106,7 +122,8 @@ namespace dotnet_lab3
             }
 
             Employee employee;
-            if (roleId == 0) // Дизайнер і його унікальне поле спеціалізація
+
+            if (roleId == 0) // Дизайнер
             {
                 string specialization = specializationTextBox.Text;
                 if (string.IsNullOrWhiteSpace(specialization))
@@ -115,9 +132,8 @@ namespace dotnet_lab3
                     return;
                 }
                 employee = new Designer(title, experience, hourRate, specialization);
-                employees.Add(employee, hoursWorked);
             }
-            else // Програміст та його унікальне поле рівень(джун, сеньйор)
+            else if (roleId == 1) // Програміст
             {
                 string level = (levelComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
                 if (string.IsNullOrWhiteSpace(level))
@@ -127,10 +143,83 @@ namespace dotnet_lab3
                 }
                 ProgrammerLevel levelEnum = level == "Джун" ? ProgrammerLevel.Junior : ProgrammerLevel.Senior;
                 employee = new Programmer(title, experience, hourRate, levelEnum);
-                employees.Add(employee, hoursWorked);
             }
+            else // Проджект Менеджер (roleId == 2)
+            {
+                employee = new ProjectManager(title, experience, hourRate);
+            }
+
+            // Додаємо в загальний словник
+            employees.Add(employee, hoursWorked);
+
+            // Оновлюємо інтерфейс
             updateEmployeeLabel(employee);
             updateTotalSalary(employees);
+
+            if (employee is ProjectManager)
+            {
+                pmComboBox.Items.Add(employee);
+            }
+            else
+            {
+                employeeComboBox.Items.Add(employee);
+            }
+        }
+
+        private void AddToTeamButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Перевіряємо, чи обрані об'єкти в обох списках
+            if (pmComboBox.SelectedItem is ProjectManager pm && employeeComboBox.SelectedItem is Employee emp)
+            {
+                // Перевіряємо, чи немає цього працівника вже в команді
+                if (!pm.Team.Contains(emp))
+                {
+                    pm.Team.Add(emp);
+                    MessageBox.Show($"Працівника '{emp.Title}' успішно додано до команди менеджера '{pm.Title}'.\n" +
+                                    $"Тепер у команді {pm.Team.Count} людей.");
+                }
+                else
+                {
+                    MessageBox.Show("Цей працівник вже знаходиться в команді цього PM-а.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Будь ласка, оберіть Проджект Менеджера та працівника зі списків.");
+            }
+        }
+
+        private void ShowTeamButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Перевіряємо, чи обрано PM-а у випадаючому списку
+            if (pmComboBox.SelectedItem is ProjectManager pm)
+            {
+                // Якщо команда порожня
+                if (pm.Team == null || pm.Team.Count == 0)
+                {
+                    MessageBox.Show($"Команда менеджера '{pm.Title}' наразі порожня.", "Інформація про команду");
+                    return;
+                }
+
+                // Формуємо список учасників
+                string teamList = $"Команда менеджера '{pm.Title}':\n\n";
+
+                foreach (Employee emp in pm.Team)
+                {
+                    // Додаємо тип спеціаліста для більшої інформативності
+                    string role = emp is Designer ? "Дизайнер" : "Програміст";
+                    teamList += $"- {emp.Title} ({role}), Досвід: {emp.Experience} років\n";
+                }
+
+                // Виводимо список на екран
+                MessageBox.Show(teamList, "Склад команди");
+            }
+            else
+            {
+                MessageBox.Show("Будь ласка, оберіть Проджект Менеджера зі списку, щоб переглянути його команду.");
+            }
         }
     }
+
+
 }

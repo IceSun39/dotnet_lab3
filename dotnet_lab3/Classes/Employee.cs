@@ -62,6 +62,11 @@ namespace dotnet_lab3.Classes
             this.hour_rate = hour_rate;
         }
 
+        public override string ToString()
+        {
+            return $"{Title} ({Experience} років досвіду)";
+        }
+
         public abstract double calculateMonthSalary(int hoursWorked);
         public abstract List<string> getProjectList();
     }
